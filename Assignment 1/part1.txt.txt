@@ -1,0 +1,50 @@
+Part 1 - Elastic Search
+Basic Indexing
+Why we might break an index into shards
+-	Helps distribute and parallelize data storage and processing across multiple nodes, improves scalability and performance of distributed systems
+Why we might replicate an index
+-	It enhances fault tolerance and ensures high availability by maintaining identical copies of index on multiple nodes, reducing the risk of data loss or service disruptions
+Why cluster health is yellow
+-	all data is available but some replicas are not yet allocated
+Indexing Reddit
+Ensure that your Elasticsearch instance has no indices in it. Provide the command you used to verify this
+-	curl -X GET 'http://localhost:9200/_all'
+-	curl -X DELETE 'http://localhost:9200/_all'
+What is the name of the index created by the command?
+-	comments
+How large is the index? (pri.store.size)
+-	31.8mb
+
+Search
+1.	Do the three queries below return different sets of documents? How can you tell?
+	a.	Yes they do return different sets of documents, as the first query returns bodies containing only cats while the second query returns comments with only cats. The third returns comments with both cat and cats
+2.	Highest score for each query
+	a.	Query 1: 10.53806
+	b.	Query 2: 11.629242
+	c.	Query 3: 18.4402
+3.	What can you deduce about the default stemming procedure used by Elasticsearch?
+	a.	Elasticsearch does not use a stemmer as the query for cat and cats produce different results, meaning it does not stem cats to cat.
+4.	Give a query that could be used to check whether or not Elasticsearch removes a common English stopword.
+a. 
+GET /your_index/_search
+{
+  "query": {
+    "match": {
+      "your_field": {
+        "query": "the",
+        "operator": "and"
+      }
+    }
+  },
+  "explain": true
+}
+
+Analyzers
+1.	Delete all indices 
+	a.	curl -X DELETE "localhost:9200/customer?pretty&pretty"
+	b.	curl -X GET "localhost:9200/_cat/indices?v&pretty"
+1.	Re-run the three queries from the previous section. In a few sentences, describe how the results have changed.
+	a.	They produce the same comments but with different hit scores. Query 3 has increased slightly.
+2.	Has the size of the index become larger or smaller compared with the previous runs? Why do you think this might be?
+	a.	24.8mb
+		Analyzer divides text to get more specific and accurate search results, therefore cutting down the size of results.

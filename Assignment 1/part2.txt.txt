@@ -1,0 +1,279 @@
+Part 2 – Lucene
+1.	java MySearchFiles < testcases.txt
+[jchan873@compute Part2]$ java MySearchFiles < testcases.txt
+Enter query:
+Searching for: his fiery sword
+5 total matching documents
+1. documents/D3.txt
+2. documents/D5.txt
+3. documents/D4.txt
+4. documents/D10.txt
+5. documents/D6.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: alas o love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D8.txt
+3. documents/D7.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: and
+8 total matching documents
+1. documents/D3.txt
+2. documents/D9.txt
+3. documents/D5.txt
+4. documents/D1.txt
+5. documents/D4.txt
+6. documents/D8.txt
+7. documents/D7.txt
+8. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: reckon
+0 total matching documents
+Enter query:
+Searching for: q
+0 total matching documents
+Enter query:
+Searching for: love
+4 total matching documents
+1. documents/D6.txt
+2. documents/D7.txt
+3. documents/D2.txt
+4. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: fair
+3 total matching documents
+1. documents/D10.txt
+2. documents/D9.txt
+3. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+
+2.	Does the Lucene 8.7.0 demo use stopwords? Explain in one or two sentences how this can be deduced from the results of the queries above.
+	a.	No the demo does not use stopwords as it returns results for “and” from the third query. If it were to use stopwords, then it should have 0 results returned.
+3.	Does the Lucene 8.7.0 demo do stemming? If so, what stemmer does it use? Explain in one or two sentences how this can be deduced from the results of the queries above.
+	a.	It is not using a stemmer as file R9.txt contains the word “reckoning”. Stemming would lead to having the stemmed word “reckon” which would match the query and thus return a result.
+4. 	What is the default similarity metric used by the Lucene 8.7.0 demo to retrieve documents? Can this be deduced from the results of the above queries? If so, explain how.
+	a. 	We cannot tell what similarity metric it uses as it produces no similarity score during its queries. It cannot be deduced from the queries as we don't know how it scores similarity from the 			queries.
+
+Stopping
+Enter query:
+Searching for: his fiery sword
+1 total matching documents
+1. documents/D3.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: alas o love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D8.txt
+3. documents/D7.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: and
+8 total matching documents
+1. documents/D3.txt
+2. documents/D9.txt
+3. documents/D5.txt
+4. documents/D1.txt
+5. documents/D4.txt
+6. documents/D8.txt
+7. documents/D7.txt
+8. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: reckon
+1 total matching documents
+1. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D7.txt
+3. documents/D8.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: fair
+3 total matching documents
+1. documents/D10.txt
+2. documents/D9.txt
+3. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+
+
+Stemmer
+
+Enter query:
+Searching for: his fiery sword
+1 total matching documents
+1. documents/D3.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: alas o love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D8.txt
+3. documents/D7.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: and
+8 total matching documents
+1. documents/D3.txt
+2. documents/D9.txt
+3. documents/D5.txt
+4. documents/D1.txt
+5. documents/D4.txt
+6. documents/D8.txt
+7. documents/D7.txt
+8. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: reckon
+1 total matching documents
+1. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D7.txt
+3. documents/D8.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: fair
+3 total matching documents
+1. documents/D10.txt
+2. documents/D9.txt
+3. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+[jchan873@compute Part2]$ ^C
+[jchan873@compute Part2]$ vi MyStandardAnalyzer.java
+[jchan873@compute Part2]$ vi MySearchFiles.java
+[jchan873@compute Part2]$ vi MyStandardAnalyzer.java
+[jchan873@compute Part2]$ vi MyStandardAnalyzer.java
+[jchan873@compute Part2]$ javac *.java
+[jchan873@compute Part2]$ java MySearchFiles < testcases.txt
+Enter query:
+Searching for: hi fieri sword
+5 total matching documents
+1. documents/D3.txt
+2. documents/D5.txt
+3. documents/D4.txt
+4. documents/D10.txt
+5. documents/D6.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: ala o love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D8.txt
+3. documents/D7.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: and
+8 total matching documents
+1. documents/D3.txt
+2. documents/D9.txt
+3. documents/D5.txt
+4. documents/D1.txt
+5. documents/D4.txt
+6. documents/D8.txt
+7. documents/D7.txt
+8. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: reckon
+1 total matching documents
+1. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D7.txt
+3. documents/D8.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: fair
+3 total matching documents
+1. documents/D10.txt
+2. documents/D9.txt
+3. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+
+
+Similarity
+
+Searching for: hi fieri sword
+5 total matching documents
+1. documents/D3.txt
+2. documents/D5.txt
+3. documents/D4.txt
+4. documents/D10.txt
+5. documents/D6.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: ala o love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D8.txt
+3. documents/D7.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: and
+8 total matching documents
+1. documents/D3.txt
+2. documents/D5.txt
+3. documents/D9.txt
+4. documents/D1.txt
+5. documents/D4.txt
+6. documents/D8.txt
+7. documents/D7.txt
+8. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: reckon
+1 total matching documents
+1. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: love
+5 total matching documents
+1. documents/D6.txt
+2. documents/D7.txt
+3. documents/D8.txt
+4. documents/D2.txt
+5. documents/D9.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+Searching for: fair
+3 total matching documents
+1. documents/D10.txt
+2. documents/D9.txt
+3. documents/D2.txt
+Press (q)uit or enter number to jump to a page.
+Enter query:
+

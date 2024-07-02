@@ -1,0 +1,66 @@
+curl -X GET "localhost:9200/_cat/health?v&pretty"
+
+epoch      timestamp cluster       status node.total node.data shards pri relo init unassign pending_tasks max_task_wait_time active_shards_percent
+1707172570 22:36:10  elasticsearch yellow          1         1      4   4    0    0        1             0                  -                 80.0%
+
+
+curl -X GET "localhost:9200/_cat/nodes?v&pretty"
+ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role   master name
+127.0.0.1           10          92   3                          cdfhilmrstw *      LAPTOP-A066IT44
+
+curl -X GET "localhost:9200/_cat/indices?v&pretty"
+health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size dataset.size
+yellow open   comments 9UhuzWK5RceUlPULmyhhmg   1   1      61013            0     24.8mb         24.8mb       24.8mb
+
+curl -X PUT "localhost:9200/customer?pretty&pretty"
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "customer"
+}
+curl -X GET "localhost:9200/_cat/indices?v&pretty"
+health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size dataset.size
+yellow open   comments 9UhuzWK5RceUlPULmyhhmg   1   1      61013            0     24.8mb         24.8mb       24.8mb
+yellow open   customer MULU9ln2RFiBf4KOS-WEdA   1   1          0            0       227b           227b         227b
+
+curl -X PUT "localhost:9200/customer/_doc/1?pretty&pretty" -H 'Content-Type: application/json' -d'
+{
+  "name": "John Doe"
+}'
+
+{
+  "_index" : "customer",
+  "_id" : "1",
+  "_version" : 1,
+  "result" : "created",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 0,
+  "_primary_term" : 1
+}
+
+curl -X GET "localhost:9200/customer/_doc/1?pretty&pretty"
+{
+  "_index" : "customer",
+  "_id" : "1",
+  "_version" : 1,
+  "_seq_no" : 0,
+  "_primary_term" : 1,
+  "found" : true,
+  "_source" : {
+    "name" : "John Doe"
+  }
+}
+
+curl -X DELETE "localhost:9200/customer?pretty&pretty"
+{
+  "acknowledged" : true
+}
+curl -X GET "localhost:9200/_cat/indices?v&pretty"
+health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size dataset.size
+yellow open   comments 9UhuzWK5RceUlPULmyhhmg   1   1      61013            0     24.8mb         24.8mb       24.8mb
+
+
